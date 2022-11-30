@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Resources/Clickable.tscn" type="PackedScene" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 43.5, 49.5 )
+
+[sub_resource type="QuadMesh" id=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 44, 50 )
+shape = SubResource( 1 )
+
+[node name="Clickable" parent="Area2D" instance=ExtResource( 1 )]
+dialogKey = "test"
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Area2D"]
+position = Vector2( 44.25, 48.75 )
+scale = Vector2( 89.5, 98.5 )
+mesh = SubResource( 2 )
