@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Dialog/DialogBox.gd"
 }, {
-"base": "VBoxContainer",
+"base": "MarginContainer",
 "class": "DialogController",
 "language": "GDScript",
 "path": "res://Dialog/DialogController.gd"

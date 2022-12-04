@@ -11,6 +11,8 @@ func _ready():
 func clicked(_viewport, event, handled, clickable):
 	if not event is InputEventMouseButton or not event.pressed:
 		return
+	
+	print("Clickable was clicked!")
 		
 	if handled:
 		return
