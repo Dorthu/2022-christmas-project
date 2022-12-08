@@ -1,0 +1,6 @@
+oven:
+  default: |
+          It's my oven; sometimes I make cookies.
+          They're delicious!
+computer:
+  default: I always wonder how this computer works without a tower.

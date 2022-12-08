@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "DialogController",
 "language": "GDScript",
 "path": "res://Dialog/DialogController.gd"
+}, {
+"base": "Node2D",
+"class": "main",
+"language": "GDScript",
+"path": "res://main.gd"
 } ]
 _global_script_class_icons={
 "Clickable": "",
 "DialogBox": "",
-"DialogController": ""
+"DialogController": "",
+"main": ""
 }
 
 [application]

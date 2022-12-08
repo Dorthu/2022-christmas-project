@@ -30,14 +30,12 @@ patch_margin_right = 32
 patch_margin_bottom = 32
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 890.0
-margin_bottom = 70.0
+margin_right = 900.0
+margin_bottom = 80.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/MarginContainer"]
-margin_right = 866.0
-margin_bottom = 46.0
+[node name="Text" type="RichTextLabel" parent="MarginContainer/MarginContainer"]
+margin_right = 900.0
+margin_bottom = 80.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_colors/default_color = Color( 0, 0, 0, 1 )
