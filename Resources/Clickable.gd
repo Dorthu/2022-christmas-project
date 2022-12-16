@@ -2,14 +2,16 @@ extends Node2D
 tool
 class_name Clickable
 
-#: The key to use when selecting dialog for this Clickable
-export(String) var dialogKey: String
-
-func _ready():
-	print(get_parent().connect("input_event", DialogSystem, "clicked", [self]))
-	print("Registered input_event!")
+#: The node in this scene's DialogTree which represents this clickable
+export var treeTarget: NodePath
 
 func _get_configuration_warning():
-	if not get_parent() is Area2D:
-		return "Only an Area2D can be clickable!"
+	#if treeTarget.is_empty():
+	#	return "Must set a behavior target for this clickable!"
+	#elif not get_node(treeTarget) is Interactable:
+	#	return "Target must be an Interactable node!"
 	return ""
+
+func _on_Area2D_input_event(viewport, event, _shape_idx):
+	if event is InputEventMouseButton and event.pressed:
+		DialogSystem.clicked(viewport, event, false, self)

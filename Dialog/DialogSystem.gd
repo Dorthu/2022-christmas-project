@@ -30,9 +30,18 @@ func clicked(_viewport, event, handled, clickable):
 	if handled:
 		return
 	
-	if not clickable.dialogKey:
+	if clickable.treeTarget.is_empty():
 		push_warning(str("Clickable ", clickable, " not configured for dialog!"))
+		return
+	
+	var target = clickable.get_node(clickable.treeTarget)
+	if not target is Interactable:
+		push_warning(str("Clickable ", clickable, " was not refernecing an Interactable with its Tree Target"))
+		return
+	
+	target.handle_click(event)
 
+func show_dialog(text):
 	curController = dialog_controller.instance()
 	get_tree().root.add_child(curController)
-	curController.show_text(dialog_tree[clickable.dialogKey]["default"])
+	curController.show_text(text)
