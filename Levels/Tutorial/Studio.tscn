@@ -1,14 +1,17 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Levels/Tutorial/bg-wip.png" type="Texture" id=1]
 [ext_resource path="res://Resources/Clickable.tscn" type="PackedScene" id=2]
 [ext_resource path="res://DialogTree/Interactable.gd" type="Script" id=3]
-[ext_resource path="res://DialogTree/EventHandler.gd" type="Script" id=4]
+[ext_resource path="res://DialogTree/TextBoxTrigger.gd" type="Script" id=4]
 [ext_resource path="res://DialogTree/DialogTree.gd" type="Script" id=5]
 [ext_resource path="res://Resources/Collectable.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Levels/Tutorial/Can.png" type="Texture" id=7]
+[ext_resource path="res://DialogTree/CollectTrigger.gd" type="Script" id=8]
+[ext_resource path="res://Levels/Room.gd" type="Script" id=9]
 
 [node name="Room" type="Node2D"]
+script = ExtResource( 9 )
 
 [node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -39,13 +42,14 @@ script = ExtResource( 3 )
 
 [node name="click" type="Node" parent="DialogTree/computer"]
 script = ExtResource( 4 )
+defaultText = "I was never sure how this computer worked without a tower"
 
 [node name="can" type="Node" parent="DialogTree"]
 script = ExtResource( 3 )
 
 [node name="click" type="Node" parent="DialogTree/can"]
-script = ExtResource( 4 )
-defaultText = "Clicked the can!"
+script = ExtResource( 8 )
+defaultText = "You picked it up"
 
 [node name="Can" parent="." instance=ExtResource( 6 )]
 position = Vector2( 863, 243 )

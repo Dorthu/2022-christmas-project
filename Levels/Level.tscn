@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Levels/Tutorial/Studio.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Levels/Level.gd" type="Script" id=2]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="RoomHolder" type="Node2D" parent="."]
+
+[node name="Room" parent="RoomHolder" instance=ExtResource( 1 )]

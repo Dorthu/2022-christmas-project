@@ -16,6 +16,10 @@ func show_text(text: String):
 
 func _on_ClickCheck_button_down():
 	if cur_box.finished():
-		get_parent().remove_child(self)
+		dismiss()
 	else:
 		cur_box.show_all()
+
+func dismiss():
+	DialogSystem.dialog_finished()
+	get_parent().remove_child(self)
