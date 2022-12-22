@@ -14,5 +14,10 @@ func _get_configuration_warning():
 
 func _on_Area2D_input_event(viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.pressed:
-		print("Clickable was clicked!")
 		DialogSystem.clicked(viewport, event, false, self)
+
+func _on_Area2D_mouse_entered():
+	DialogSystem.hovered(self, true)
+
+func _on_Area2D_mouse_exited():
+	DialogSystem.hovered(self, false)

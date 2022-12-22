@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://DialogTree/DialogTree.gd"
 }, {
+"base": "Trigger",
+"class": "HoverTrigger",
+"language": "GDScript",
+"path": "res://DialogTree/HoverTrigger.gd"
+}, {
 "base": "Node",
 "class": "Interactable",
 "language": "GDScript",
@@ -81,6 +86,7 @@ _global_script_class_icons={
 "DialogBox": "",
 "DialogController": "",
 "DialogTree": "res://DialogTree/dialog_tree.svg",
+"HoverTrigger": "",
 "Interactable": "res://DialogTree/interactable.svg",
 "Level": "",
 "LevelRoom": "",
