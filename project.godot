@@ -55,6 +55,11 @@ _global_script_classes=[ {
 "path": "res://Levels/Room.gd"
 }, {
 "base": "Trigger",
+"class": "RoomChangeTrigger",
+"language": "GDScript",
+"path": "res://DialogTree/RoomChangeTrigger.gd"
+}, {
+"base": "Trigger",
 "class": "TextBoxTrigger",
 "language": "GDScript",
 "path": "res://DialogTree/TextBoxTrigger.gd"
@@ -79,6 +84,7 @@ _global_script_class_icons={
 "Interactable": "res://DialogTree/interactable.svg",
 "Level": "",
 "LevelRoom": "",
+"RoomChangeTrigger": "",
 "TextBoxTrigger": "res://DialogTree/event_handler.svg",
 "Trigger": "",
 "main": ""

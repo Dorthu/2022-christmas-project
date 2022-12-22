@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Levels/Tutorial/bg-wip.png" type="Texture" id=1]
 [ext_resource path="res://Resources/Clickable.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Levels/Tutorial/Can.png" type="Texture" id=7]
 [ext_resource path="res://DialogTree/CollectTrigger.gd" type="Script" id=8]
 [ext_resource path="res://Levels/Room.gd" type="Script" id=9]
+[ext_resource path="res://DialogTree/RoomChangeTrigger.gd" type="Script" id=10]
 
 [node name="Room" type="Node2D"]
 script = ExtResource( 9 )
@@ -51,8 +52,20 @@ script = ExtResource( 3 )
 script = ExtResource( 8 )
 defaultText = "You picked it up"
 
+[node name="door" type="Node" parent="DialogTree"]
+script = ExtResource( 3 )
+
+[node name="click" type="Node" parent="DialogTree/door"]
+script = ExtResource( 10 )
+roomTarget = "Bathroom"
+
 [node name="Can" parent="." instance=ExtResource( 6 )]
 position = Vector2( 863, 243 )
 scale = Vector2( 0.274742, 0.274742 )
 treeTarget = NodePath("../DialogTree/can")
 sprite = ExtResource( 7 )
+
+[node name="Door" parent="." instance=ExtResource( 2 )]
+position = Vector2( 131, 276 )
+scale = Vector2( 11.3424, 27.4015 )
+treeTarget = NodePath("../DialogTree/door")
