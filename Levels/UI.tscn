@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Levels/UI.gd" type="Script" id=1]
-[ext_resource path="res://Levels/tmp_wrist.png" type="Texture" id=2]
+[ext_resource path="res://Levels/write-sketch.png" type="Texture" id=2]
 
 [node name="UI" type="Control"]
 anchor_right = 1.0
@@ -16,16 +16,16 @@ anchor_bottom = 1.0
 margin_top = -150.0
 
 [node name="Wrist" type="MarginContainer" parent="HUD"]
-margin_right = 150.0
-margin_bottom = 150.0
+margin_right = 321.0
+margin_bottom = 158.0
 
 [node name="TextureRect" type="TextureRect" parent="HUD/Wrist"]
-margin_right = 150.0
-margin_bottom = 150.0
+margin_right = 321.0
+margin_bottom = 158.0
 texture = ExtResource( 2 )
 stretch_mode = 6
 
 [node name="Inventory" type="MarginContainer" parent="HUD"]
-margin_left = 154.0
-margin_right = 154.0
-margin_bottom = 150.0
+margin_left = 325.0
+margin_right = 325.0
+margin_bottom = 158.0
