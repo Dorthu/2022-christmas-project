@@ -1,10 +1,10 @@
-extends Control
+extends CenterContainer
 
 class_name DialogBox
 
 var content: String
 var total_delta: float = 0
-onready var text_box: RichTextLabel = $MarginContainer/MarginContainer/Text
+onready var text_box: RichTextLabel = $NinePatchRect/MarginContainer/Text
 
 # this is how slowly/quickly characters appear in the text box, in characters/second
 # a value of 1.0 means "one character per second"

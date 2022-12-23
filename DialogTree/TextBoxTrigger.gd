@@ -1,9 +1,9 @@
 extends Trigger
 tool
-class_name TextBoxTrigger, "res://DialogTree/event_handler.svg"
+class_name TextBoxTrigger, "res://DialogTree/text-box-trigger.svg"
 
 
 export var defaultText: String
 
-func clicked(_target: Node2D, _event):
+func fire(_data: Trigger.TriggerFireData):
 	DialogSystem.show_dialog(defaultText)

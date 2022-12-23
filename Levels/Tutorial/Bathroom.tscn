@@ -7,7 +7,7 @@
 [ext_resource path="res://Levels/Room.gd" type="Script" id=5]
 [ext_resource path="res://Levels/Tutorial/Bathroom lvl1.png" type="Texture" id=6]
 [ext_resource path="res://DialogTree/RoomChangeTrigger.gd" type="Script" id=7]
-[ext_resource path="res://DialogTree/HoverTrigger.gd" type="Script" id=8]
+[ext_resource path="res://DialogTree/ToggleTrigger.gd" type="Script" id=8]
 [ext_resource path="res://Levels/tmp-arrow-right.png" type="Texture" id=9]
 
 [node name="Room" type="Node2D"]

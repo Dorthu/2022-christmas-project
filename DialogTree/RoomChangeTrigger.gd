@@ -1,8 +1,8 @@
 extends Trigger
-class_name RoomChangeTrigger
+class_name RoomChangeTrigger, "res://DialogTree/change-room-trigger.svg"
 
 export var roomTarget: String
 
-func clicked(_target: Node2D, _event):
+func fire(_data: Trigger.TriggerFireData):
 	GameController.currentLevel.change_room(roomTarget)
 

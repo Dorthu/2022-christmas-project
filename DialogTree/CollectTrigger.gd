@@ -1,8 +1,8 @@
 extends TextBoxTrigger
 tool
-class_name CollectTrigger, "res://DialogTree/event_handler.svg"
+class_name CollectTrigger, "res://DialogTree/collect-trigger.svg"
 
-func clicked(target: Node2D, event):
-	.clicked(target, event)
-	target.get_parent().remove_child(target)
+func fire(data: Trigger.TriggerFireData):
+	.fire(data)
+	data.target.get_parent().remove_child(data.target)
 	# TODO - add to inventory as well
