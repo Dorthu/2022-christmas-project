@@ -1,8 +1,6 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Resources/Clickable.tscn" type="PackedScene" id=1]
-[ext_resource path="res://DialogTree/Interactable.gd" type="Script" id=2]
-[ext_resource path="res://DialogTree/DialogTree.gd" type="Script" id=3]
 [ext_resource path="res://DialogTree/TextBoxTrigger.gd" type="Script" id=4]
 [ext_resource path="res://Levels/Room.gd" type="Script" id=5]
 [ext_resource path="res://Levels/Tutorial/Bathroom lvl1.png" type="Texture" id=6]
@@ -20,34 +18,31 @@ centered = false
 [node name="Toilet" parent="." instance=ExtResource( 1 )]
 position = Vector2( 491, 454 )
 scale = Vector2( 6.2816, 12.6057 )
-treeTarget = NodePath("../DialogTree/toilet")
+
+[node name="click" type="Node" parent="Toilet"]
+script = ExtResource( 4 )
+defaultText = "My toilet, where I poop"
 
 [node name="Door" parent="." instance=ExtResource( 1 )]
 position = Vector2( 978, 299 )
 scale = Vector2( 4.73124, 30.5233 )
-treeTarget = NodePath("../DialogTree/door")
 
-[node name="DialogTree" type="Node" parent="."]
-script = ExtResource( 3 )
-
-[node name="toilet" type="Node" parent="DialogTree"]
-script = ExtResource( 2 )
-
-[node name="click" type="Node" parent="DialogTree/toilet"]
-script = ExtResource( 4 )
-defaultText = "My toilet, where I poop"
-
-[node name="door" type="Node" parent="DialogTree"]
-script = ExtResource( 2 )
-
-[node name="click" type="Node" parent="DialogTree/door"]
+[node name="click" type="Node" parent="Door"]
 script = ExtResource( 7 )
 roomTarget = "Studio"
 
-[node name="hover" type="Node" parent="DialogTree/door"]
+[node name="hover" type="Node" parent="Door"]
 script = ExtResource( 8 )
 
-[node name="toggle" type="Sprite" parent="DialogTree/door/hover"]
+[node name="toggle" type="Sprite" parent="Door/hover"]
 visible = false
 position = Vector2( 951, 308 )
 texture = ExtResource( 9 )
+
+[node name="Clickable" parent="." instance=ExtResource( 1 )]
+position = Vector2( 351, 180 )
+scale = Vector2( 1.35455, 2.24288 )
+
+[node name="click" type="Node" parent="Clickable"]
+script = ExtResource( 4 )
+defaultText = "I named him Stanley, after the game."

@@ -1,6 +1,6 @@
 extends Camera2D
 
-var CAMERA_SPEED: float = 200.0
+var CAMERA_SPEED: float = 300.0
 var SCREEN_SIZE: Vector2 = Vector2(1024, 600)
 var PAN_EDGE_WIDTH: float = SCREEN_SIZE.x / 3
 var PAN_SPEED_DIVISOR: float = PAN_EDGE_WIDTH - 100

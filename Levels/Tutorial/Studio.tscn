@@ -1,10 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Levels/Tutorial/bg-wip.png" type="Texture" id=1]
 [ext_resource path="res://Resources/Clickable.tscn" type="PackedScene" id=2]
-[ext_resource path="res://DialogTree/Interactable.gd" type="Script" id=3]
 [ext_resource path="res://DialogTree/TextBoxTrigger.gd" type="Script" id=4]
-[ext_resource path="res://DialogTree/DialogTree.gd" type="Script" id=5]
 [ext_resource path="res://Resources/Collectable.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Levels/Tutorial/Can.png" type="Texture" id=7]
 [ext_resource path="res://DialogTree/CollectTrigger.gd" type="Script" id=8]
@@ -21,51 +19,32 @@ centered = false
 [node name="Oven" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1024, 341 )
 scale = Vector2( 9, 11.12 )
-treeTarget = NodePath("../DialogTree/oven")
+
+[node name="click" type="Node" parent="Oven"]
+script = ExtResource( 4 )
+defaultText = "It worked!"
 
 [node name="Computer" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1863, 231 )
 scale = Vector2( 12.0524, 8.48742 )
-treeTarget = NodePath("../DialogTree/computer")
 
-[node name="DialogTree" type="Node" parent="."]
-script = ExtResource( 5 )
-
-[node name="oven" type="Node" parent="DialogTree"]
-script = ExtResource( 3 )
-
-[node name="click" type="Node" parent="DialogTree/oven"]
-script = ExtResource( 4 )
-defaultText = "It worked!"
-
-[node name="computer" type="Node" parent="DialogTree"]
-script = ExtResource( 3 )
-
-[node name="click" type="Node" parent="DialogTree/computer"]
+[node name="click" type="Node" parent="Computer"]
 script = ExtResource( 4 )
 defaultText = "I was never sure how this computer worked without a tower"
-
-[node name="can" type="Node" parent="DialogTree"]
-script = ExtResource( 3 )
-
-[node name="click" type="Node" parent="DialogTree/can"]
-script = ExtResource( 8 )
-defaultText = "You picked it up"
-
-[node name="door" type="Node" parent="DialogTree"]
-script = ExtResource( 3 )
-
-[node name="click" type="Node" parent="DialogTree/door"]
-script = ExtResource( 10 )
-roomTarget = "Bathroom"
 
 [node name="Can" parent="." instance=ExtResource( 6 )]
 position = Vector2( 863, 243 )
 scale = Vector2( 0.274742, 0.274742 )
-treeTarget = NodePath("../DialogTree/can")
 sprite = ExtResource( 7 )
+
+[node name="click" type="Node" parent="Can"]
+script = ExtResource( 8 )
+defaultText = "You picked it up"
 
 [node name="Door" parent="." instance=ExtResource( 2 )]
 position = Vector2( 131, 276 )
 scale = Vector2( 11.3424, 27.4015 )
-treeTarget = NodePath("../DialogTree/door")
+
+[node name="click" type="Node" parent="Door"]
+script = ExtResource( 10 )
+roomTarget = "Bathroom"

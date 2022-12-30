@@ -2,8 +2,15 @@ extends Node2D
 tool
 class_name Clickable
 
-#: The node in this scene's DialogTree which represents this clickable
-export var treeTarget: NodePath
+var clickEvent: Trigger = null
+var hoverEvent: Trigger = null
+
+func _ready():
+	for c in get_children():
+		if c.name == "click":
+			clickEvent = c
+		elif c.name == "hover":
+			hoverEvent = c
 
 func _get_configuration_warning():
 	#if treeTarget.is_empty():
@@ -13,11 +20,13 @@ func _get_configuration_warning():
 	return ""
 
 func _on_Area2D_input_event(viewport, event, _shape_idx):
-	if event is InputEventMouseButton and event.pressed:
-		DialogSystem.clicked(viewport, event, false, self)
+	if clickEvent and event is InputEventMouseButton and event.pressed:
+		clickEvent.fire(Trigger.new_click_event(self, event))
 
 func _on_Area2D_mouse_entered():
-	DialogSystem.hovered(self, true)
+	if hoverEvent:
+		hoverEvent.fire(Trigger.new_hover_event(true))
 
 func _on_Area2D_mouse_exited():
-	DialogSystem.hovered(self, false)
+	if hoverEvent:
+		hoverEvent.fire(Trigger.new_hover_event(false))
