@@ -22,7 +22,7 @@ scale = Vector2( 9, 11.12 )
 
 [node name="click" type="Node" parent="Oven"]
 script = ExtResource( 4 )
-defaultText = "It worked!"
+defaultText = "This one has a long description so I can see how the dialog box interacts with thingslikethis.  It's also going to need to split to multiple boxes, but it'll need to be super long for that."
 
 [node name="Computer" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1863, 231 )
@@ -39,7 +39,10 @@ sprite = ExtResource( 7 )
 
 [node name="click" type="Node" parent="Can"]
 script = ExtResource( 8 )
-defaultText = "You picked it up"
+defaultText = "You picked it up. 
+In a long-winded fashion.
+
+Jawn."
 
 [node name="Door" parent="." instance=ExtResource( 2 )]
 position = Vector2( 131, 276 )

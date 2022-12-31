@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Dialog/DialogBox.gd" type="Script" id=1]
 [ext_resource path="res://Dialog/placeholder-dialog-bg.png" type="Texture" id=2]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://Dialog/Arimo/Arimo-VariableFont_wght.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+font_data = SubResource( 1 )
 
 [node name="Control" type="CenterContainer"]
 anchor_top = 1.0
@@ -38,4 +45,8 @@ margin_bottom = 80.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_colors/default_color = Color( 0, 0, 0, 1 )
-text = "This is where the text goes"
+custom_fonts/normal_font = SubResource( 2 )
+text = "Placeholder text
+This should never display in-game"
+scroll_active = false
+deselect_on_focus_loss_enabled = false
