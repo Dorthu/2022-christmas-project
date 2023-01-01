@@ -1,13 +1,15 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Levels/Tutorial/bg-wip.png" type="Texture" id=1]
 [ext_resource path="res://Resources/Clickable.tscn" type="PackedScene" id=2]
-[ext_resource path="res://DialogTree/TextBoxTrigger.gd" type="Script" id=4]
+[ext_resource path="res://DialogTree/DialogTree.gd" type="Script" id=3]
+[ext_resource path="res://Resources/TextBoxTrigger.gd" type="Script" id=4]
+[ext_resource path="res://DialogTree/DialogEntry.gd" type="Script" id=5]
 [ext_resource path="res://Resources/Collectable.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Levels/Tutorial/Can.png" type="Texture" id=7]
-[ext_resource path="res://DialogTree/CollectTrigger.gd" type="Script" id=8]
+[ext_resource path="res://Resources/CollectTrigger.gd" type="Script" id=8]
 [ext_resource path="res://Levels/Room.gd" type="Script" id=9]
-[ext_resource path="res://DialogTree/RoomChangeTrigger.gd" type="Script" id=10]
+[ext_resource path="res://Resources/RoomChangeTrigger.gd" type="Script" id=10]
 
 [node name="Room" type="Node2D"]
 script = ExtResource( 9 )
@@ -22,7 +24,7 @@ scale = Vector2( 9, 11.12 )
 
 [node name="click" type="Node" parent="Oven"]
 script = ExtResource( 4 )
-defaultText = "This one has a long description so I can see how the dialog box interacts with thingslikethis.  It's also going to need to split to multiple boxes, but it'll need to be super long for that."
+dialogKey = NodePath("../../DialogTree/ovenDesc")
 
 [node name="Computer" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1863, 231 )
@@ -30,7 +32,7 @@ scale = Vector2( 12.0524, 8.48742 )
 
 [node name="click" type="Node" parent="Computer"]
 script = ExtResource( 4 )
-defaultText = "I was never sure how this computer worked without a tower"
+dialogKey = NodePath("../../DialogTree/computerDesc")
 
 [node name="Can" parent="." instance=ExtResource( 6 )]
 position = Vector2( 863, 243 )
@@ -39,10 +41,7 @@ sprite = ExtResource( 7 )
 
 [node name="click" type="Node" parent="Can"]
 script = ExtResource( 8 )
-defaultText = "You picked it up. 
-In a long-winded fashion.
-
-Jawn."
+dialogKey = NodePath("../../DialogTree/canDesc")
 
 [node name="Door" parent="." instance=ExtResource( 2 )]
 position = Vector2( 131, 276 )
@@ -51,3 +50,20 @@ scale = Vector2( 11.3424, 27.4015 )
 [node name="click" type="Node" parent="Door"]
 script = ExtResource( 10 )
 roomTarget = "Bathroom"
+
+[node name="DialogTree" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="ovenDesc" type="Node" parent="DialogTree"]
+script = ExtResource( 5 )
+text = "My good old oven, which I sometimes use to reheat pizza."
+timeCost = 10.0
+
+[node name="canDesc" type="Node" parent="DialogTree"]
+script = ExtResource( 5 )
+text = "Ah, delicious White Claw.  It's way too early for this."
+
+[node name="computerDesc" type="Node" parent="DialogTree"]
+script = ExtResource( 5 )
+text = "I always wondered how this thing ran without a tower. . .
+Best not to think about it."

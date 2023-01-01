@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Levels/UI.gd" type="Script" id=1]
-[ext_resource path="res://Levels/wrist-sketch.png" type="Texture" id=2]
+[ext_resource path="res://Levels/Clock.tscn" type="PackedScene" id=2]
 
 [node name="UI" type="Control"]
 anchor_right = 1.0
@@ -15,15 +15,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -150.0
 
-[node name="Wrist" type="MarginContainer" parent="HUD"]
+[node name="Clock" parent="HUD" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 321.0
 margin_bottom = 158.0
-
-[node name="TextureRect" type="TextureRect" parent="HUD/Wrist"]
-margin_right = 321.0
-margin_bottom = 158.0
-texture = ExtResource( 2 )
-stretch_mode = 6
 
 [node name="Inventory" type="MarginContainer" parent="HUD"]
 margin_left = 325.0

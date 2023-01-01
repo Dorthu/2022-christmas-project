@@ -1,15 +1,10 @@
 extends Control
 
+onready var clock = $HUD/Clock
 
-func _on_LeftBar_gui_input(event):
-	print("Left bar GUI input")
-	print(event)
+func _ready():
+	var _res = DialogSystem.connect("dialogActive", self, "_on_DialogSystem_DialogActive")
 
-
-func _on_RightBar_gui_input(event):
-	print("Right bar GUI input")
-	print(event)
-
-
-func _on_RightBar_mouse_entered():
-	print("Right bar mouse entered")
+func _on_DialogSystem_DialogActive(active: bool, controller: DialogController = null):
+	if not active:
+		GameController.add_time(controller.getEntry().timeCost)

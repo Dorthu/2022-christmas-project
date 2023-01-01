@@ -35,4 +35,3 @@ margin_right = 1024.0
 margin_bottom = 600.0
 
 [connection signal="button_down" from="ClickCheck" to="." method="_on_ClickCheck_button_down"]
-[connection signal="pressed" from="ClickCheck" to="." method="_on_ClickCheck_pressed"]

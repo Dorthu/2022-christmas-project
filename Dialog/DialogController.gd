@@ -4,28 +4,30 @@ class_name DialogController
 
 var clickable: Clickable
 var dialog = preload("res://Dialog/DialogBox.tscn")
+var cur_entry = null setget , getEntry
 var cur_box = null
 var cur_text = []
 var cur_text_index = 0
 
-func show_text(text: String):
-	# temporary function to show a text box
+func show_entry(entry: DialogEntry):
+	cur_entry = entry
 	cur_box = dialog.instance()
 	
 	# use the box to split the text into lines
-	cur_text = cur_box.break_string(text)
+	cur_text = cur_box.break_string(entry.text)
 	cur_text_index = 0
 	
 	cur_box.init(cur_text[0])
 	$DialogContainer.add_child(cur_box)
-	print("Added dialog to container")
-
 
 func _on_ClickCheck_button_down():
 	if cur_box.finished():
 		next()
 	else:
 		cur_box.show_all()
+
+func getEntry() -> DialogEntry:
+	return cur_entry
 
 func next():
 	cur_text_index += 1

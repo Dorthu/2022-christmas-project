@@ -1,45 +1,19 @@
 extends Node
 
+# func _on_DialogSystem_DialogActive(active: bool, controller: DialogController = null):
+signal dialogActive
+
 var dialog_controller = preload("res://Dialog/DialogController.tscn")
 
 # stateful vars
 var curController: DialogController = null
 var dialog_tree: Dictionary = {}
 
-func _get_target(clickable: Clickable) -> Interactable:
-	if clickable.treeTarget.is_empty():
-		push_warning(str("Clickable ", clickable, " not configured for dialog!"))
-		return null
-	
-	var target = clickable.get_node(clickable.treeTarget)
-	
-	if not target is Interactable:
-		push_warning(str("Clickable ", clickable, " was not refernecing an Interactable with its Tree Target"))
-		return null
-	
-	return target
-
-func clicked(_viewport, event, handled, clickable):
-	if not event is InputEventMouseButton or not event.pressed:
-		return
-	
-	if handled:
-		return
-
-	var target = _get_target(clickable)
-	if target:
-		target.handle_click(clickable, event)
-
-func show_dialog(text):
-	GameController.canPanCamera = false
+func show_dialog(dialogEntry: DialogEntry):
 	curController = dialog_controller.instance()
 	GameController.root.add_ui_element(curController)
-	curController.show_text(text)
+	curController.show_entry(dialogEntry)
+	emit_signal("dialogActive", true, curController)
 
 func dialog_finished():
-	GameController.canPanCamera = true
-
-func hovered(clickable: Clickable, active: bool):
-	var target = _get_target(clickable)
-	if target:
-		target.handle_hover(active)
+	emit_signal("dialogActive", false, curController)

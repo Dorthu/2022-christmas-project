@@ -11,6 +11,8 @@ func _ready():
 		roomNameMap[child.name] = child
 		if not child == curRoom:
 			child.hide()
+	
+	var _res = GameController.connect("timeChanged", self, "_on_GameController_TimeChanged")
 
 func get_room_width():
 	return curRoom.width
@@ -26,3 +28,8 @@ func change_room(target: String):
 	curRoom.hide()
 	curRoom = roomNameMap[target]
 	curRoom.show()
+
+func _on_GameController_TimeChanged(newTime: float):
+	if newTime >= 45.0:
+		DialogSystem.show_dialog($dayEnd)
+		GameController.reset_time()
