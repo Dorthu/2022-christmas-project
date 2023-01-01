@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Resources/Collectable.gd"
 }, {
+"base": "Node2D",
+"class": "DayFader",
+"language": "GDScript",
+"path": "res://Resources/DayFade.gd"
+}, {
 "base": "CenterContainer",
 "class": "DialogBox",
 "language": "GDScript",
@@ -83,6 +88,7 @@ _global_script_class_icons={
 "Clickable": "",
 "CollectTrigger": "res://Resources/collect-trigger.svg",
 "Collectable": "",
+"DayFader": "",
 "DialogBox": "",
 "DialogController": "",
 "DialogEntry": "res://DialogTree/event_handler.svg",

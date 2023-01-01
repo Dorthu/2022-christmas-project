@@ -4,6 +4,7 @@ class_name Level
 
 onready var curRoom = $RoomHolder.get_child(0)
 var roomNameMap: Dictionary = {}
+var fader = preload("res://Resources/DayFade.tscn")
 
 func _ready():
 	# hide all rooms except the default one
@@ -32,4 +33,10 @@ func change_room(target: String):
 func _on_GameController_TimeChanged(newTime: float):
 	if newTime >= 45.0:
 		DialogSystem.show_dialog($dayEnd)
-		GameController.reset_time()
+		GameController.advance_day()
+		var fade = fader.instance()
+		GameController.root.add_child(fade)
+		fade.start() # blocks until done
+		yield(fade, "finished")
+		GameController.root.remove_child(fade)
+		
