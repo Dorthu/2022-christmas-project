@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Resources/Clickable.tscn" type="PackedScene" id=1]
 [ext_resource path="res://DialogTree/DialogTree.gd" type="Script" id=2]
@@ -9,13 +9,91 @@
 [ext_resource path="res://Resources/RoomChangeTrigger.gd" type="Script" id=7]
 [ext_resource path="res://Resources/ToggleTrigger.gd" type="Script" id=8]
 [ext_resource path="res://Levels/tmp-arrow-right.png" type="Texture" id=9]
+[ext_resource path="res://Levels/Tutorial/stan.png" type="Texture" id=10]
+[ext_resource path="res://Levels/Tutorial/demon.png" type="Texture" id=11]
+[ext_resource path="res://Resources/AnimationPlayerTrigger.gd" type="Script" id=12]
+[ext_resource path="res://Resources/ChainTrigger.gd" type="Script" id=13]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "MirrorFade"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("stan:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("demon:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="Room" type="Node2D"]
 script = ExtResource( 5 )
 
+[node name="MirrorBG" type="Sprite" parent="."]
+position = Vector2( 805, 187 )
+scale = Vector2( 0.129, 353.228 )
+z_index = -5
+texture = SubResource( 2 )
+
+[node name="stan" type="Sprite" parent="MirrorBG"]
+position = Vector2( 15.5044, 0.141503 )
+scale = Vector2( 3.09516, 0.00113036 )
+texture = ExtResource( 10 )
+
+[node name="demon" type="Sprite" parent="MirrorBG"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -7.75195, 0.0820923 )
+scale = Vector2( 3.00666, 0.00109804 )
+texture = ExtResource( 11 )
+
 [node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 6 )
 centered = false
+
+[node name="Mirror" parent="." instance=ExtResource( 1 )]
+position = Vector2( 804, 186 )
+scale = Vector2( 12.6622, 15.7086 )
+
+[node name="click" type="Node" parent="Mirror"]
+script = ExtResource( 13 )
+
+[node name="TextBoxTrigger" type="Node" parent="Mirror/click"]
+script = ExtResource( 4 )
+dialogKey = NodePath("../../../DialogTree/stanSelfText")
+
+[node name="AnimationPlayerTrigger" type="Node" parent="Mirror/click"]
+script = ExtResource( 12 )
+animationName = "MirrorFade"
+
+[node name="animation" type="AnimationPlayer" parent="Mirror/click/AnimationPlayerTrigger"]
+root_node = NodePath("../../../../MirrorBG")
+anims/MirrorFade = SubResource( 3 )
+
+[node name="TextBoxTrigger2" type="Node" parent="Mirror/click"]
+script = ExtResource( 4 )
+dialogKey = NodePath("../../../DialogTree/daemonEntryText")
 
 [node name="Toilet" parent="." instance=ExtResource( 1 )]
 position = Vector2( 491, 454 )
@@ -62,3 +140,13 @@ script = ExtResource( 3 )
 text = "I've named him Stanely.
 In reference to the game."
 timeCost = 5.0
+
+[node name="stanSelfText" type="Node" parent="DialogTree"]
+script = ExtResource( 3 )
+text = "There's one good-looking fellar."
+
+[node name="daemonEntryText" type="Node" parent="DialogTree"]
+script = ExtResource( 3 )
+text = "Hello good-looking fellar.
+I hear you have a . . . problem.
+Maybe we can make a deal?"

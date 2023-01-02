@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Trigger",
+"class": "AnimationPlayerTrigger",
+"language": "GDScript",
+"path": "res://Resources/AnimationPlayerTrigger.gd"
+}, {
+"base": "Trigger",
+"class": "ChainTrigger",
+"language": "GDScript",
+"path": "res://Resources/ChainTrigger.gd"
+}, {
 "base": "Node2D",
 "class": "Clickable",
 "language": "GDScript",
@@ -85,6 +95,8 @@ _global_script_classes=[ {
 "path": "res://main.gd"
 } ]
 _global_script_class_icons={
+"AnimationPlayerTrigger": "",
+"ChainTrigger": "",
 "Clickable": "",
 "CollectTrigger": "res://Resources/collect-trigger.svg",
 "Collectable": "",

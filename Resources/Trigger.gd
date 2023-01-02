@@ -1,4 +1,5 @@
 extends Node
+signal trigger_finished
 class_name Trigger
 
 # a class to contain all information needed by triggers to fire
@@ -20,5 +21,5 @@ static func new_hover_event(active: bool):
 	return TriggerFireData.new(null, null, active)
 
 # this must be implemented by all trigger types
-func fire(_data: TriggerFireData):
-	push_error("Base Trigger type recieved fire event!")
+func fire(data: TriggerFireData):
+	push_warning("do_trigger called on base Trigger class!")
