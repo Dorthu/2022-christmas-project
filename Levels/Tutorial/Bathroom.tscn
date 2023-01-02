@@ -61,3 +61,4 @@ timeCost = 5.0
 script = ExtResource( 3 )
 text = "I've named him Stanely.
 In reference to the game."
+timeCost = 5.0

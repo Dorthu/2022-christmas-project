@@ -8,3 +8,6 @@ func _ready():
 
 func add_ui_element(node: Control):
 	$UI.add_child(node)
+
+func remove_ui_element(node: Control):
+	$UI.remove_child(node)

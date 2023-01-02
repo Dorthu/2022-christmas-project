@@ -62,8 +62,10 @@ timeCost = 10.0
 [node name="canDesc" type="Node" parent="DialogTree"]
 script = ExtResource( 5 )
 text = "Ah, delicious White Claw.  It's way too early for this."
+timeCost = 15.0
 
 [node name="computerDesc" type="Node" parent="DialogTree"]
 script = ExtResource( 5 )
 text = "I always wondered how this thing ran without a tower. . .
 Best not to think about it."
+timeCost = 7.0

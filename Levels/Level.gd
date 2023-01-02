@@ -3,8 +3,10 @@ extends Node2D
 class_name Level
 
 onready var curRoom = $RoomHolder.get_child(0)
+onready var initialRoom: String = curRoom.name
 var roomNameMap: Dictionary = {}
 var fader = preload("res://Resources/DayFade.tscn")
+var checkEndOfDay = true
 
 func _ready():
 	# hide all rooms except the default one
@@ -30,13 +32,30 @@ func change_room(target: String):
 	curRoom = roomNameMap[target]
 	curRoom.show()
 
+func end_day():
+	# the day's ending, so stop looking for it
+	checkEndOfDay = false
+	
+	# show the day end dialog box
+	DialogSystem.show_dialog($dayEnd)
+	
+	# fade to black
+	var fade = fader.instance()
+	GameController.root.add_ui_element(fade)
+	fade.fade_in()
+	yield(fade, "finished")
+	
+	# remove the dialog box, reset room, and fade back in
+	DialogSystem.force_dismiss_dialog()
+	GameController.advance_day()
+	change_room(initialRoom) # TODO - move camera around too
+	fade.fade_out()
+	yield(fade, "finished")
+	
+	# and we're done
+	GameController.root.remove_ui_element(fade)
+	checkEndOfDay = true
+
 func _on_GameController_TimeChanged(newTime: float):
-	if newTime >= 45.0:
-		DialogSystem.show_dialog($dayEnd)
-		GameController.advance_day()
-		var fade = fader.instance()
-		GameController.root.add_child(fade)
-		fade.start() # blocks until done
-		yield(fade, "finished")
-		GameController.root.remove_child(fade)
-		
+	if checkEndOfDay and newTime >= 45.0:
+		end_day()
