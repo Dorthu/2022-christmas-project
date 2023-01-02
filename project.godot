@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Resources/Collectable.gd"
 }, {
-"base": "Node2D",
+"base": "Container",
 "class": "DayFader",
 "language": "GDScript",
 "path": "res://Resources/DayFade.gd"

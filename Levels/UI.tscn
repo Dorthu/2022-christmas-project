@@ -19,9 +19,9 @@ margin_top = -150.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 321.0
-margin_bottom = 158.0
+margin_bottom = 160.0
 
 [node name="Inventory" type="MarginContainer" parent="HUD"]
 margin_left = 325.0
 margin_right = 325.0
-margin_bottom = 158.0
+margin_bottom = 160.0

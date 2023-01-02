@@ -1,4 +1,4 @@
-extends Node2D
+extends Container
 
 signal finished
 class_name DayFader
