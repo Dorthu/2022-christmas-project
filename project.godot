@@ -70,6 +70,16 @@ _global_script_classes=[ {
 "path": "res://Levels/Room.gd"
 }, {
 "base": "Trigger",
+"class": "QuestAdvancementTrigger",
+"language": "GDScript",
+"path": "res://Resources/QuestAdvancementTrigger.gd"
+}, {
+"base": "ChainTrigger",
+"class": "QuestDependentTrigger",
+"language": "GDScript",
+"path": "res://Resources/QuestDependentTrigger.gd"
+}, {
+"base": "Trigger",
 "class": "RoomChangeTrigger",
 "language": "GDScript",
 "path": "res://Resources/RoomChangeTrigger.gd"
@@ -107,6 +117,8 @@ _global_script_class_icons={
 "DialogTree": "res://DialogTree/dialog_tree.svg",
 "Level": "",
 "LevelRoom": "",
+"QuestAdvancementTrigger": "",
+"QuestDependentTrigger": "",
 "RoomChangeTrigger": "",
 "TextBoxTrigger": "res://Resources/text-box-trigger.svg",
 "ToggleTrigger": "res://Resources/toggle-trigger.svg",

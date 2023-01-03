@@ -8,6 +8,9 @@ var roomNameMap: Dictionary = {}
 var fader = preload("res://Resources/DayFade.tscn")
 var checkEndOfDay = true
 
+# The quests for this level, and their status (and int)
+export var quests: Dictionary
+
 func _ready():
 	# hide all rooms except the default one
 	for child in $RoomHolder.get_children():
@@ -16,6 +19,10 @@ func _ready():
 			child.hide()
 	
 	var _res = GameController.connect("timeChanged", self, "_on_GameController_TimeChanged")
+	
+	# set all quests to just started
+	for key in quests.keys():
+		quests[key] = 0
 
 func get_room_width():
 	return curRoom.width
@@ -59,3 +66,14 @@ func end_day():
 func _on_GameController_TimeChanged(newTime: float):
 	if checkEndOfDay and newTime >= 45.0:
 		end_day()
+
+func set_quest(name: String, stage: int):
+	if name in quests:
+		quests[name] = stage
+	else:
+		push_warning("Requested setting non-existent quest " + name + " to " + str(stage))
+
+func get_quest_status(name: String) -> int:
+	if name in quests:
+		return quests[name]
+	return -1

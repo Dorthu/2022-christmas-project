@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Resources/Clickable.tscn" type="PackedScene" id=1]
 [ext_resource path="res://DialogTree/DialogTree.gd" type="Script" id=2]
@@ -12,7 +12,8 @@
 [ext_resource path="res://Levels/Tutorial/stan.png" type="Texture" id=10]
 [ext_resource path="res://Levels/Tutorial/demon.png" type="Texture" id=11]
 [ext_resource path="res://Resources/AnimationPlayerTrigger.gd" type="Script" id=12]
-[ext_resource path="res://Resources/ChainTrigger.gd" type="Script" id=13]
+[ext_resource path="res://Resources/QuestDependentTrigger.gd" type="Script" id=14]
+[ext_resource path="res://Resources/QuestAdvancementTrigger.gd" type="Script" id=15]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1 )
@@ -77,7 +78,17 @@ position = Vector2( 804, 186 )
 scale = Vector2( 12.6622, 15.7086 )
 
 [node name="click" type="Node" parent="Mirror"]
-script = ExtResource( 13 )
+script = ExtResource( 14 )
+__meta__ = {
+"_editor_description_": ""
+}
+questName = "seenDemon"
+requiredMax = 0
+
+[node name="QuestAdvancementTrigger" type="Node" parent="Mirror/click"]
+script = ExtResource( 15 )
+questName = "seenDemon"
+toStage = 1
 
 [node name="TextBoxTrigger" type="Node" parent="Mirror/click"]
 script = ExtResource( 4 )
