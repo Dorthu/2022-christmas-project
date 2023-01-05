@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Levels/Tutorial/stanbody.png" type="Texture" id=1]
+[ext_resource path="res://Levels/Tutorial/stan-eyes.png" type="Texture" id=2]
+[ext_resource path="res://Levels/Tutorial/eyeballs.gd" type="Script" id=3]
+
+[node name="stan" type="Node2D"]
+
+[node name="eyeballParent" type="Node2D" parent="."]
+position = Vector2( 4, -157 )
+
+[node name="eyeballs" type="Sprite" parent="eyeballParent"]
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="creepy" type="Sprite" parent="."]
+texture = ExtResource( 1 )

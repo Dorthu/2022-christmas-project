@@ -9,7 +9,7 @@
 [ext_resource path="res://Resources/RoomChangeTrigger.gd" type="Script" id=7]
 [ext_resource path="res://Resources/ToggleTrigger.gd" type="Script" id=8]
 [ext_resource path="res://Levels/tmp-arrow-right.png" type="Texture" id=9]
-[ext_resource path="res://Levels/Tutorial/stan.png" type="Texture" id=10]
+[ext_resource path="res://Levels/Tutorial/stan.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Levels/Tutorial/demon.png" type="Texture" id=11]
 [ext_resource path="res://Resources/AnimationPlayerTrigger.gd" type="Script" id=12]
 [ext_resource path="res://Resources/QuestDependentTrigger.gd" type="Script" id=14]
@@ -25,7 +25,7 @@ gradient = SubResource( 1 )
 resource_name = "MirrorFade"
 length = 4.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("stan:modulate")
+tracks/0/path = NodePath("demon:modulate")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -34,11 +34,11 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("demon:modulate")
-tracks/1/interp = 2
+tracks/1/path = NodePath("stan:modulate")
+tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
@@ -46,7 +46,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [node name="Room" type="Node2D"]
@@ -58,10 +58,9 @@ scale = Vector2( 0.129, 353.228 )
 z_index = -5
 texture = SubResource( 2 )
 
-[node name="stan" type="Sprite" parent="MirrorBG"]
-position = Vector2( 15.5044, 0.141503 )
+[node name="stan" parent="MirrorBG" instance=ExtResource( 10 )]
+position = Vector2( 15.5039, 0.141541 )
 scale = Vector2( 3.09516, 0.00113036 )
-texture = ExtResource( 10 )
 
 [node name="demon" type="Sprite" parent="MirrorBG"]
 modulate = Color( 1, 1, 1, 0 )
