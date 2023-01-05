@@ -11,3 +11,6 @@ func add_ui_element(node: Control):
 
 func remove_ui_element(node: Control):
 	$UI.remove_child(node)
+
+func get_camera():
+	return $Camera

@@ -4,6 +4,7 @@ between levels.  This controller is a globally-referencable singleton.
 """
 extends Node
 signal timeChanged
+signal toggle_camera
 
 var currentLevel: Level = null
 var root: main = null
@@ -23,3 +24,6 @@ func add_time(time: float):
 func advance_day():
 	currentTime = 0.0
 	currentDay += 1
+
+func do_camera(active: bool):
+	emit_signal("toggle_camera", active)

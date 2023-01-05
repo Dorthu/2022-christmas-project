@@ -4,8 +4,14 @@ class_name Level
 
 onready var curRoom = $RoomHolder.get_child(0)
 onready var initialRoom: String = curRoom.name
+
+# rooms are the different background levels in the area
 var roomNameMap: Dictionary = {}
+# overlays show up over top of the current room, and are dismissed by clicking outside of themselves
+var overlaynameMap: Dictionary = {}
+# the fader is used to transition between days
 var fader = preload("res://Resources/DayFade.tscn")
+var overlayGuard = preload("res://Resources/OverlayGuard.tscn")
 var checkEndOfDay = true
 
 # The quests for this level, and their status (and int)
@@ -17,6 +23,10 @@ func _ready():
 		roomNameMap[child.name] = child
 		if not child == curRoom:
 			child.hide()
+	
+	for child in $OverlayHolder.get_children():
+		overlaynameMap[child.name] = child
+		child.hide()
 	
 	var _res = GameController.connect("timeChanged", self, "_on_GameController_TimeChanged")
 	
@@ -38,6 +48,32 @@ func change_room(target: String):
 	curRoom.hide()
 	curRoom = roomNameMap[target]
 	curRoom.show()
+
+func show_overlay(name: String):
+	if not name in overlaynameMap:
+		push_error(str("show_overlay called with invalid target ", name))
+		return
+	
+	# disable the camera scrolling
+	GameController.do_camera(false)
+	
+	# center the overlay guard and the overlay itself
+	var camera = GameController.root.get_camera()
+	#$OverlayGuard.position = camera.position
+	overlaynameMap[name].position = camera.position
+	overlaynameMap[name].show()
+	
+	var guard = overlayGuard.instance()
+	GameController.root.add_ui_element(guard)
+	
+	yield(guard, "exit_overlay")
+	
+	# remove the overlay
+	overlaynameMap[name].hide()
+	GameController.root.remove_ui_element(guard)
+	
+	# re-enable the camera
+	GameController.do_camera(true)
 
 func end_day():
 	# the day's ending, so stop looking for it

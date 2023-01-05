@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Levels/Tutorial/bg-wip.png" type="Texture" id=1]
 [ext_resource path="res://Resources/Clickable.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Resources/CollectTrigger.gd" type="Script" id=8]
 [ext_resource path="res://Levels/Room.gd" type="Script" id=9]
 [ext_resource path="res://Resources/RoomChangeTrigger.gd" type="Script" id=10]
+[ext_resource path="res://Resources/ShowOverlayTrigger.gd" type="Script" id=11]
 
 [node name="Room" type="Node2D"]
 script = ExtResource( 9 )
@@ -69,3 +70,11 @@ script = ExtResource( 5 )
 text = "I always wondered how this thing ran without a tower. . .
 Best not to think about it."
 timeCost = 7.0
+
+[node name="Dresser" parent="." instance=ExtResource( 2 )]
+position = Vector2( 2234, 302 )
+scale = Vector2( 9.09665, 15.5847 )
+
+[node name="click" type="Node" parent="Dresser"]
+script = ExtResource( 11 )
+OverlayName = "DresserOverlay"

@@ -8,10 +8,14 @@ var PAN_SPEED_DIVISOR: float = PAN_EDGE_WIDTH - 100
 func _ready():
 	position = Vector2(SCREEN_SIZE.x/2, SCREEN_SIZE.y/2)
 	var _res = DialogSystem.connect("dialogActive", self, "_on_DialogSystem_DialogActive")
+	_res = GameController.connect("toggle_camera", self, "_on_GameController_ToggleCamera")
 
 func _on_DialogSystem_DialogActive(active: bool, _controller: DialogController = null):
 	# when a dialog is active, the camera shouldn't update (and thereforce panning should stop)
 	set_process(not active)
+	
+func _on_GameController_ToggleCamera(active: bool):
+	set_process(active)
 
 func _process(delta: float):
 	var roomWidth = GameController.currentLevel.get_room_width()
