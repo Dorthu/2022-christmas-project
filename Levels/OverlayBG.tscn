@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture2D" id=2]
+gradient = SubResource( 1 )
+width = 1024
+height = 600
+
+[node name="Node2D" type="Sprite"]
+modulate = Color( 1, 1, 1, 0.352941 )
+texture = SubResource( 2 )

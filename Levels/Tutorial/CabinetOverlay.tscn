@@ -30,3 +30,4 @@ script = ExtResource( 3 )
 [node name="emptyShelfDesc" type="Node" parent="DialogTree"]
 script = ExtResource( 5 )
 text = "This shelf is conspicuously empty..."
+timeCost = 30.0

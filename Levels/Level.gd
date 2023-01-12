@@ -3,6 +3,7 @@ extends Node2D
 class_name Level
 
 onready var curRoom = $RoomHolder.get_child(0)
+var curOverlay = null # if set, is an Overlay that is currently active
 onready var initialRoom: String = curRoom.name
 
 # rooms are the different background levels in the area
@@ -11,7 +12,6 @@ var roomNameMap: Dictionary = {}
 var overlaynameMap: Dictionary = {}
 # the fader is used to transition between days
 var fader = preload("res://Resources/DayFade.tscn")
-var overlayGuard = preload("res://Resources/OverlayGuard.tscn")
 var checkEndOfDay = true
 
 # The quests for this level, and their status (and int)
@@ -54,6 +54,8 @@ func show_overlay(name: String):
 		push_error(str("show_overlay called with invalid target ", name))
 		return
 	
+	# hide the clock
+	GameController.root.toggle_clock(false)
 	# disable the camera scrolling
 	GameController.do_camera(false)
 	# disable interaction in the current room
@@ -62,16 +64,22 @@ func show_overlay(name: String):
 	# center the overlay guard and the overlay itself
 	var camera = GameController.root.get_camera()
 	
-	var thisOverlay = overlaynameMap[name]
-	thisOverlay.position = camera.position
-	thisOverlay.show()
+	curOverlay = overlaynameMap[name]
+	curOverlay.position = camera.position
+	curOverlay.show()
 	
 	# pause this function right here until the overlay says its done
-	yield(thisOverlay, "exit_overlay")
+	yield(curOverlay, "exit_overlay")
+	
+	# pay the time cost
+	GameController.add_time(curOverlay.timeCost)
 	
 	# remove the overlay
-	thisOverlay.hide()
+	curOverlay.hide()
+	curOverlay = null
 	
+	# bring the clock back
+	GameController.root.toggle_clock(true)
 	# re-enable the camera
 	GameController.do_camera(true)
 	# re-enable interaction
@@ -80,6 +88,10 @@ func show_overlay(name: String):
 func end_day():
 	# the day's ending, so stop looking for it
 	checkEndOfDay = false
+	
+	# dismiss any active overlays immediately
+	if curOverlay:
+		curOverlay.force_dismiss()
 	
 	# show the day end dialog box
 	DialogSystem.show_dialog($dayEnd)

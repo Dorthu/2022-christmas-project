@@ -2,6 +2,9 @@ extends Node2D
 signal exit_overlay
 class_name Overlay
 
+export var timeCost: float = 5.0
+
+var gradientScene: PackedScene = preload("res://Levels/OverlayBG.tscn")
 onready var bg: Sprite = $Background
 const SCREEN_HEIGHT = 600 # TODO de-dupe
 const SCREEN_WIDTH = 1024
@@ -39,6 +42,11 @@ func _ready():
 	# add them to this scene
 	add_child(leftBound)
 	add_child(rightBound)
+	
+	# put the gradient behind us
+	var grad = gradientScene.instance()
+	add_child(grad)
+	move_child(grad, 0)
 
 func _on_Bounds_InputEvent(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.pressed:
@@ -47,3 +55,6 @@ func _on_Bounds_InputEvent(_viewport, event, _shape_idx):
 		# doing this o_o
 		event.pressed = false
 		emit_signal("exit_overlay")
+
+func force_dismiss():
+	emit_signal("exit_overlay")
