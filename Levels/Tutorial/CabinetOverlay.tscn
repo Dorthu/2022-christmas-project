@@ -1,12 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Levels/Tutorial/Dresser open.png" type="Texture" id=1]
 [ext_resource path="res://Resources/Clickable.tscn" type="PackedScene" id=2]
 [ext_resource path="res://DialogTree/DialogTree.gd" type="Script" id=3]
 [ext_resource path="res://Resources/TextBoxTrigger.gd" type="Script" id=4]
 [ext_resource path="res://DialogTree/DialogEntry.gd" type="Script" id=5]
+[ext_resource path="res://Levels/Overlay.gd" type="Script" id=6]
 
-[node name="Node2D" type="Node2D"]
+[node name="Overlay" type="Node2D"]
+script = ExtResource( 6 )
 
 [node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 1 )

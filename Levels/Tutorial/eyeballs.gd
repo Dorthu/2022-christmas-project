@@ -10,7 +10,7 @@ func _ready():
 	print(anchor)
 	print(global_pos)
 
-func _process(delta):
+func _process(_delta):
 	# pull toward the mouse
 	var mouse_pos = get_global_mouse_position()
 	position = Vector2(

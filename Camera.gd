@@ -5,6 +5,13 @@ var SCREEN_SIZE: Vector2 = Vector2(1024, 600)
 var PAN_EDGE_WIDTH: float = SCREEN_SIZE.x / 3
 var PAN_SPEED_DIVISOR: float = PAN_EDGE_WIDTH - 100
 
+# camera controlling variables; the camera can be disabled in the following ways:
+#  - if the GameController tells us not to active
+#  - if a DialogController has control of the screen
+# the default configuration here enables the camera; any other permutation diables it
+var cameraActive: bool = true
+var dialogActive: bool = false
+
 func _ready():
 	position = Vector2(SCREEN_SIZE.x/2, SCREEN_SIZE.y/2)
 	var _res = DialogSystem.connect("dialogActive", self, "_on_DialogSystem_DialogActive")
@@ -12,12 +19,16 @@ func _ready():
 
 func _on_DialogSystem_DialogActive(active: bool, _controller: DialogController = null):
 	# when a dialog is active, the camera shouldn't update (and thereforce panning should stop)
-	set_process(not active)
+	dialogActive = active
 	
 func _on_GameController_ToggleCamera(active: bool):
-	set_process(active)
+	cameraActive = active
 
 func _process(delta: float):
+	if not cameraActive or dialogActive:
+		# only run the camera if its active and no dialog is on the screen
+		return
+	
 	var roomWidth = GameController.currentLevel.get_room_width()
 	var mousePos = get_global_mouse_position()
 	var mouseX = mousePos.x - self.position.x + SCREEN_SIZE.x/2

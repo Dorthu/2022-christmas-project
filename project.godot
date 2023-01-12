@@ -69,6 +69,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Levels/Room.gd"
 }, {
+"base": "Node2D",
+"class": "Overlay",
+"language": "GDScript",
+"path": "res://Levels/Overlay.gd"
+}, {
 "base": "Control",
 "class": "OverlayGuard",
 "language": "GDScript",
@@ -127,6 +132,7 @@ _global_script_class_icons={
 "DialogTree": "res://DialogTree/dialog_tree.svg",
 "Level": "",
 "LevelRoom": "",
+"Overlay": "",
 "OverlayGuard": "",
 "QuestAdvancementTrigger": "",
 "QuestDependentTrigger": "",

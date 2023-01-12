@@ -56,24 +56,26 @@ func show_overlay(name: String):
 	
 	# disable the camera scrolling
 	GameController.do_camera(false)
+	# disable interaction in the current room
+	curRoom.set_interactable(false)
 	
 	# center the overlay guard and the overlay itself
 	var camera = GameController.root.get_camera()
-	#$OverlayGuard.position = camera.position
-	overlaynameMap[name].position = camera.position
-	overlaynameMap[name].show()
 	
-	var guard = overlayGuard.instance()
-	GameController.root.add_ui_element(guard)
+	var thisOverlay = overlaynameMap[name]
+	thisOverlay.position = camera.position
+	thisOverlay.show()
 	
-	yield(guard, "exit_overlay")
+	# pause this function right here until the overlay says its done
+	yield(thisOverlay, "exit_overlay")
 	
 	# remove the overlay
-	overlaynameMap[name].hide()
-	GameController.root.remove_ui_element(guard)
+	thisOverlay.hide()
 	
 	# re-enable the camera
 	GameController.do_camera(true)
+	# re-enable interaction
+	curRoom.set_interactable(true)
 
 func end_day():
 	# the day's ending, so stop looking for it
