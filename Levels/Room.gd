@@ -2,6 +2,8 @@ extends Node2D
 signal toggleClickables
 class_name LevelRoom
 
+export var initialCameraPan: float = 0
+
 onready var width = $Background.texture.get_width()
 
 # this is populated with nodes that display on only one day of the week; they advance
@@ -19,7 +21,7 @@ func _ready():
 			node.hide()
 		dayNodes[0].show()
 
-# sets up listeners for our parent Level
+# our parent level will call this when it's ready; we can use it to listen to signals it emits
 func registerLevel(level: Level):
 	var _r = level.connect("advanceDay", self, "_on_Level_AdvanceDay")
 

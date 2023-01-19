@@ -16,6 +16,7 @@ func _ready():
 	position = Vector2(SCREEN_SIZE.x/2, SCREEN_SIZE.y/2)
 	var _res = DialogSystem.connect("dialogActive", self, "_on_DialogSystem_DialogActive")
 	_res = GameController.connect("toggle_camera", self, "_on_GameController_ToggleCamera")
+	_res = GameController.connect("snap_camera", self, "_on_GameController_SnapCamera")
 
 func _on_DialogSystem_DialogActive(active: bool, _controller: DialogController = null):
 	# when a dialog is active, the camera shouldn't update (and thereforce panning should stop)
@@ -24,12 +25,15 @@ func _on_DialogSystem_DialogActive(active: bool, _controller: DialogController =
 func _on_GameController_ToggleCamera(active: bool):
 	cameraActive = active
 
+func _on_GameController_SnapCamera(pan: float):
+	position.x = pan
+	clamp_to_room()
+
 func _process(delta: float):
 	if not cameraActive or dialogActive:
 		# only run the camera if its active and no dialog is on the screen
 		return
 	
-	var roomWidth = GameController.currentLevel.get_room_width()
 	var mousePos = get_global_mouse_position()
 	var mouseX = mousePos.x - self.position.x + SCREEN_SIZE.x/2
 	var speedMod = 1
@@ -42,7 +46,12 @@ func _process(delta: float):
 		speedMod = (mouseX - (SCREEN_SIZE.x - PAN_EDGE_WIDTH)) / PAN_SPEED_DIVISOR
 		position.x += CAMERA_SPEED * delta * speedMod
 	
-	# clamp to within the bounds of the room
+	clamp_to_room()
+	
+# clamp to within the bounds of the room
+func clamp_to_room():
+	var roomWidth = GameController.currentLevel.get_room_width()
+	
 	if position.x - (SCREEN_SIZE.x / 2) < 0:
 		position.x = SCREEN_SIZE.x / 2
 	elif position.x + SCREEN_SIZE.x / 2 > roomWidth:

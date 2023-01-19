@@ -34,6 +34,9 @@ func _ready():
 	# set all quests to just started
 	for key in quests.keys():
 		quests[key] = 0
+	
+	GameController.currentLevel = self
+	GameController.snap_camera(curRoom.initialCameraPan)
 
 func get_room_width():
 	return curRoom.width
@@ -106,7 +109,8 @@ func end_day():
 	# remove the dialog box, reset room, and fade back in
 	DialogSystem.force_dismiss_dialog()
 	GameController.advance_day()
-	change_room(initialRoom) # TODO - move camera around too
+	change_room(initialRoom)
+	GameController.snap_camera(curRoom.initialCameraPan)
 	emit_signal("advanceDay")
 	fade.fade_out()
 	yield(fade, "finished")

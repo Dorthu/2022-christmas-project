@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Levels/Tutorial/main-tuesday.png" type="Texture" id=1]
 [ext_resource path="res://Resources/Clickable.tscn" type="PackedScene" id=2]
@@ -16,9 +16,13 @@
 [ext_resource path="res://Levels/Tutorial/main-monday.png" type="Texture" id=14]
 [ext_resource path="res://Levels/Tutorial/main-friday.png" type="Texture" id=15]
 [ext_resource path="res://Levels/Tutorial/main-thursday.png" type="Texture" id=16]
+[ext_resource path="res://Levels/Tutorial/coin-jar.png" type="Texture" id=17]
+[ext_resource path="res://Levels/Tutorial/frat-paddle.png" type="Texture" id=18]
 
 [node name="Room" type="Node2D"]
+position = Vector2( 0, -1 )
 script = ExtResource( 9 )
+initialCameraPan = 3000.0
 
 [node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 12 )
@@ -26,7 +30,6 @@ centered = false
 
 [node name="DayNodes" type="Node2D" parent="."]
 position = Vector2( 6.10352e-05, 3.05176e-05 )
-scale = Vector2( 1, 1 )
 
 [node name="Monday" type="Node2D" parent="DayNodes"]
 
@@ -36,7 +39,6 @@ centered = false
 
 [node name="Tuesday" type="Node2D" parent="DayNodes"]
 visible = false
-scale = Vector2( 1, 1 )
 
 [node name="Sprite" type="Sprite" parent="DayNodes/Tuesday"]
 texture = ExtResource( 1 )
@@ -48,6 +50,14 @@ visible = false
 [node name="Sprite" type="Sprite" parent="DayNodes/Wednesday"]
 texture = ExtResource( 13 )
 centered = false
+
+[node name="bed" parent="DayNodes/Wednesday" instance=ExtResource( 2 )]
+position = Vector2( 2672, 487 )
+scale = Vector2( 31.924, 8.43036 )
+
+[node name="click" type="Node" parent="DayNodes/Wednesday/bed"]
+script = ExtResource( 4 )
+dialogKey = NodePath("../../../../DialogTree/bedWednesdayDesc")
 
 [node name="Thursday" type="Node2D" parent="DayNodes"]
 visible = false
@@ -63,6 +73,37 @@ visible = false
 position = Vector2( -6.10352e-05, -3.05176e-05 )
 texture = ExtResource( 15 )
 centered = false
+
+[node name="DialogTree" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="ovenDesc" type="Node" parent="DialogTree"]
+script = ExtResource( 5 )
+text = "My good old oven, which I sometimes use to reheat pizza."
+timeCost = 10.0
+
+[node name="canDesc" type="Node" parent="DialogTree"]
+script = ExtResource( 5 )
+text = "Ah, delicious White Claw.  It's way too early for this."
+timeCost = 15.0
+
+[node name="computerDesc" type="Node" parent="DialogTree"]
+script = ExtResource( 5 )
+text = "I always wondered how this thing ran without a tower. . .
+Best not to think about it."
+timeCost = 7.0
+
+[node name="bedWednesdayDesc" type="Node" parent="DialogTree"]
+script = ExtResource( 5 )
+text = "I really need to make my bed."
+
+[node name="coinJarCollect" type="Node" parent="DialogTree"]
+script = ExtResource( 5 )
+text = "Yep, what a concept.  I could use a little fuel myself, and we could all use a little change."
+
+[node name="fratPaddleCollect" type="Node" parent="DialogTree"]
+script = ExtResource( 5 )
+text = "I picked it up."
 
 [node name="Oven" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1024, 341 )
@@ -97,24 +138,13 @@ scale = Vector2( 11.3424, 27.4015 )
 script = ExtResource( 10 )
 roomTarget = "Bathroom"
 
-[node name="DialogTree" type="Node" parent="."]
-script = ExtResource( 3 )
+[node name="CoinJar" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2236, 102 )
+sprite = ExtResource( 17 )
 
-[node name="ovenDesc" type="Node" parent="DialogTree"]
-script = ExtResource( 5 )
-text = "My good old oven, which I sometimes use to reheat pizza."
-timeCost = 10.0
-
-[node name="canDesc" type="Node" parent="DialogTree"]
-script = ExtResource( 5 )
-text = "Ah, delicious White Claw.  It's way too early for this."
-timeCost = 15.0
-
-[node name="computerDesc" type="Node" parent="DialogTree"]
-script = ExtResource( 5 )
-text = "I always wondered how this thing ran without a tower. . .
-Best not to think about it."
-timeCost = 7.0
+[node name="click" type="Node" parent="CoinJar"]
+script = ExtResource( 8 )
+dialogKey = NodePath("../../DialogTree/coinJarCollect")
 
 [node name="Dresser" parent="." instance=ExtResource( 2 )]
 position = Vector2( 2234, 302 )
@@ -123,3 +153,11 @@ scale = Vector2( 9.09665, 15.5847 )
 [node name="click" type="Node" parent="Dresser"]
 script = ExtResource( 11 )
 OverlayName = "DresserOverlay"
+
+[node name="FratPaddle" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2612, 71 )
+sprite = ExtResource( 18 )
+
+[node name="click" type="Node" parent="FratPaddle"]
+script = ExtResource( 8 )
+dialogKey = NodePath("../../DialogTree/fratPaddleCollect")
