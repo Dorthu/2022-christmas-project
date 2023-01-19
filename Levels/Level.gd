@@ -1,5 +1,5 @@
 extends Node2D
-
+signal advanceDay
 class_name Level
 
 onready var curRoom = $RoomHolder.get_child(0)
@@ -20,6 +20,7 @@ export var quests: Dictionary
 func _ready():
 	# hide all rooms except the default one
 	for child in $RoomHolder.get_children():
+		child.registerLevel(self)
 		roomNameMap[child.name] = child
 		if not child == curRoom:
 			child.hide()
@@ -106,6 +107,7 @@ func end_day():
 	DialogSystem.force_dismiss_dialog()
 	GameController.advance_day()
 	change_room(initialRoom) # TODO - move camera around too
+	emit_signal("advanceDay")
 	fade.fade_out()
 	yield(fade, "finished")
 	
