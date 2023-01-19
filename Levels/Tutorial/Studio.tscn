@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Levels/Tutorial/main-tuesday.png" type="Texture" id=1]
 [ext_resource path="res://Resources/Clickable.tscn" type="PackedScene" id=2]
@@ -18,9 +18,10 @@
 [ext_resource path="res://Levels/Tutorial/main-thursday.png" type="Texture" id=16]
 [ext_resource path="res://Levels/Tutorial/coin-jar.png" type="Texture" id=17]
 [ext_resource path="res://Levels/Tutorial/frat-paddle.png" type="Texture" id=18]
+[ext_resource path="res://Levels/InventoryItem.tscn" type="PackedScene" id=19]
 
 [node name="Room" type="Node2D"]
-position = Vector2( 0, -1 )
+position = Vector2( 0, -2 )
 script = ExtResource( 9 )
 initialCameraPan = 3000.0
 
@@ -73,6 +74,17 @@ visible = false
 position = Vector2( -6.10352e-05, -3.05176e-05 )
 texture = ExtResource( 15 )
 centered = false
+
+[node name="ItemHolder" type="Node" parent="."]
+
+[node name="Can" parent="ItemHolder" instance=ExtResource( 19 )]
+texture = ExtResource( 7 )
+
+[node name="Jar" parent="ItemHolder" instance=ExtResource( 19 )]
+texture = ExtResource( 17 )
+
+[node name="Paddle" parent="ItemHolder" instance=ExtResource( 19 )]
+texture = ExtResource( 18 )
 
 [node name="DialogTree" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -129,6 +141,7 @@ sprite = ExtResource( 7 )
 [node name="click" type="Node" parent="Can"]
 script = ExtResource( 8 )
 dialogKey = NodePath("../../DialogTree/canDesc")
+PickupItem = NodePath("../../ItemHolder/Can")
 
 [node name="Door" parent="." instance=ExtResource( 2 )]
 position = Vector2( 131, 276 )
@@ -145,6 +158,7 @@ sprite = ExtResource( 17 )
 [node name="click" type="Node" parent="CoinJar"]
 script = ExtResource( 8 )
 dialogKey = NodePath("../../DialogTree/coinJarCollect")
+PickupItem = NodePath("../../ItemHolder/Jar")
 
 [node name="Dresser" parent="." instance=ExtResource( 2 )]
 position = Vector2( 2234, 302 )
@@ -161,3 +175,4 @@ sprite = ExtResource( 18 )
 [node name="click" type="Node" parent="FratPaddle"]
 script = ExtResource( 8 )
 dialogKey = NodePath("../../DialogTree/fratPaddleCollect")
+PickupItem = NodePath("../../ItemHolder/Paddle")

@@ -59,6 +59,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://DialogTree/DialogTree.gd"
 }, {
+"base": "Control",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://Levels/Inventory.gd"
+}, {
+"base": "Control",
+"class": "InventoryItem",
+"language": "GDScript",
+"path": "res://Levels/InventoryItem.gd"
+}, {
 "base": "Node2D",
 "class": "Level",
 "language": "GDScript",
@@ -130,6 +140,8 @@ _global_script_class_icons={
 "DialogController": "",
 "DialogEntry": "res://DialogTree/event_handler.svg",
 "DialogTree": "res://DialogTree/dialog_tree.svg",
+"Inventory": "",
+"InventoryItem": "",
 "Level": "",
 "LevelRoom": "",
 "Overlay": "",
